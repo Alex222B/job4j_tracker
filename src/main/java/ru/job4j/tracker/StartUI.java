@@ -36,12 +36,18 @@ public class StartUI {
                 Item item = new Item(name);
                 System.out.println(tracker.replace(id, item) ? "Заявка изменена успешно." : "Ошибка замены заявки.");
             } else if (select == 3) {
-                System.out.println("=== Удалитьь заявку ===");
+                System.out.println("=== Удалить заявку ===");
                 System.out.print("Введите id: ");
                 int id = Integer.parseInt(scanner.nextLine());
                 Item item = tracker.findById(id);
                 tracker.delete(id);
                 System.out.println(item != null ? "Заявка удалена успешно." : "Ошибка удаления заявки.");
+            } else if (select == 4) {
+                System.out.println("=== Вывод заявки по id ===");
+                System.out.print("Введите id: ");
+                int id = Integer.parseInt(scanner.nextLine());
+                Item item = tracker.findById(id);
+                System.out.println(item != null ? item : "Заявка с введенным id: " + id + " не найдена.");
             } else if (select == 6) {
                 run = false;
             }
