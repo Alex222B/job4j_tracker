@@ -8,53 +8,77 @@ public class StartUI {
             showMenu();
             int select = input.askInt("Выбрать: ");
             if (select == 0) {
-                System.out.println("=== Создание новой заявки ===");
-                String name = input.askStr("Введите имя: ");
-                Item item = new Item(name);
-                tracker.add(item);
-                System.out.println("Добавленная заявка: " + item);
+                StartUI.createItem(input, tracker);
             } else if (select == 1) {
-                System.out.println("=== Вывод всех заявок ===");
-                Item[] items = tracker.findAll();
-                if (items.length > 0) {
-                    for (Item item : items) {
-                        System.out.println(item);
-                    }
-                } else {
-                    System.out.println("Хранилище еще не содержит заявок");
-                }
+                findAllItem(tracker);
             } else if (select == 2) {
-                System.out.println("=== Изменить заявку ===");
-                int id = input.askInt("Введите id: ");
-                String name = input.askStr("Введите имя: ");
-                Item item = new Item(name);
-                System.out.println(tracker.replace(id, item) ? "Заявка изменена успешно." : "Ошибка замены заявки.");
+                replaceItem(input, tracker);
             } else if (select == 3) {
-                System.out.println("=== Удалить заявку ===");
-                int id = input.askInt("Введите id: ");
-                Item item = tracker.findById(id);
-                tracker.delete(id);
-                System.out.println(item != null ? "Заявка удалена успешно." : "Ошибка удаления заявки.");
+                deleteItem(input, tracker);
             } else if (select == 4) {
-                System.out.println("=== Вывод заявки по id ===");
-                int id = input.askInt("Введите id: ");
-                Item item = tracker.findById(id);
-                System.out.println(item != null ? item : "Заявка с введенным id: " + id + " не найдена.");
+                findItemById(input, tracker);
             } else if (select == 5) {
-                System.out.println("=== Вывод заявк по имени ===");
-                String name = input.askStr("Введите имя: ");
-                Item[] items = tracker.findByName(name);
-                if (items.length > 0) {
-                    for (Item item : items) {
-                        System.out.println(item);
-                    }
-                } else {
-                    System.out.println("Заявки с именем: " + name + " не найденo.");
-                }
+                findItemByName(input, tracker);
             } else {
                 run = false;
             }
         }
+    }
+
+    private static void findAllItem(Tracker tracker) {
+        System.out.println("=== Вывод всех заявок ===");
+        Item[] items = tracker.findAll();
+        if (items.length > 0) {
+            for (Item item : items) {
+                System.out.println(item);
+            }
+        } else {
+            System.out.println("Хранилище еще не содержит заявок");
+        }
+    }
+
+    private static void findItemByName(Input input, Tracker tracker) {
+        System.out.println("=== Вывод заявк по имени ===");
+        String name = input.askStr("Введите имя: ");
+        Item[] items = tracker.findByName(name);
+        if (items.length > 0) {
+            for (Item item : items) {
+                System.out.println(item);
+            }
+        } else {
+            System.out.println("Заявки с именем: " + name + " не найденo.");
+        }
+    }
+
+    private static void findItemById(Input input, Tracker tracker) {
+        System.out.println("=== Вывод заявки по id ===");
+        int id = input.askInt("Введите id: ");
+        Item item = tracker.findById(id);
+        System.out.println(item != null ? item : "Заявка с введенным id: " + id + " не найдена.");
+    }
+
+    private static void deleteItem(Input input, Tracker tracker) {
+        System.out.println("=== Удалить заявку ===");
+        int id = input.askInt("Введите id: ");
+        Item item = tracker.findById(id);
+        tracker.delete(id);
+        System.out.println(item != null ? "Заявка удалена успешно." : "Ошибка удаления заявки.");
+    }
+
+    private static void createItem(Input input, Tracker tracker) {
+        System.out.println("=== Создание новой заявки ===");
+        String name = input.askStr("Введите имя: ");
+        Item item = new Item(name);
+        tracker.add(item);
+        System.out.println("Добавленная заявка: " + item);
+    }
+
+    private static void replaceItem(Input input, Tracker tracker) {
+        System.out.println("=== Изменить заявку ===");
+        int id = input.askInt("Введите id: ");
+        String name = input.askStr("Введите имя: ");
+        Item item = new Item(name);
+        System.out.println(tracker.replace(id, item) ? "Заявка изменена успешно." : "Ошибка замены заявки.");
     }
 
     private void showMenu() {
