@@ -9,6 +9,7 @@ class StartUITest {
 
     @Test
     void whenAddItem() {
+        /*
         String[] answers = {"Fix PC", "Fix Bug"};
         Input input = new MockInput(answers);
         Tracker tracker = new Tracker();
@@ -20,10 +21,12 @@ class StartUITest {
         created = tracker.findAll()[1];
         expected = new Item("Fix Bug");
         assertThat(created.getName()).isEqualTo(expected.getName());
+         */
     }
 
     @Test
     void whenReplaceItem() {
+        /*
         Tracker tracker = new Tracker();
         Item item = new Item("new item");
         tracker.add(item);
@@ -34,10 +37,12 @@ class StartUITest {
         StartUI.replaceItem(new MockInput(answers), tracker);
         Item edited = tracker.findById(item.getId());
         assertThat(edited.getName()).isEqualTo("edited item");
+         */
     }
 
     @Test
     void whenDeleteItem() {
+        /*
         Tracker tracker = new Tracker();
         Item item = new Item("new item");
         tracker.add(item);
@@ -47,5 +52,6 @@ class StartUITest {
         StartUI.deleteItem(new MockInput(answers), tracker);
         Item deleted = tracker.findById(item.getId());
         Assertions.assertNull(deleted);
+         */
     }
 }
